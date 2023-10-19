@@ -5,7 +5,7 @@ public class Shipment
     private string shipment_date;
     private string shipment_status;
     private string shipment_type;
-    private DeliveryMethod delivery_method;
+    private List<DeliveryMethod> delivery_method;
     private ShoppingCart shopping_cart
 
 }

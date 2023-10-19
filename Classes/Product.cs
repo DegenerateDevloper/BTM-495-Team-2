@@ -8,7 +8,7 @@ public class Product
     private string product_type;
     private decimal product_price;
     private int sku_number;
-    private Supplier supplier;
+    private List<Supplier> suppliers;
     private double product_dimension;
     private double product_weight;
 
