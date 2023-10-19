@@ -1,16 +1,17 @@
-public class User
+public abstract class User
 {
-    public int user_ID;
-    public string user_fname;
-    public string user_lname;
-    public int phone_number;
+	// abstract class = modifier that indicates missing component or incomplete implementation, cannot be instantiated
+    private int user_ID;
+    private string user_fname;
+    private string user_lname;
+    private string user_phone;
 
-        public void verifyId() 
+        public bool verifyId() 
   {
     // Logic to come
   }
 
-        public void verifyPassword() 
+        public bool verifyPassword() 
   {
     // Logic to come
   }

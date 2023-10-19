@@ -1,16 +1,16 @@
 public class ShoppingCart
 {
     private int shopping_cart_ID;
-    private Product product;
+    private List<Product> products_in_sc;
     private Customer customer;
 
-        public void addToCart() 
-  {
-    // Logic to come
-  }
-        public void deleteFromCart() 
-  {
-    // Logic to come
-  }
-  
+    public void addToShoppingCart(string product_ID) 
+    {
+        // Logic to come
+    }
+    
+    public void deleteFromShoppingCart(string product_ID) 
+    {
+        // Logic to come
+    }
 }
