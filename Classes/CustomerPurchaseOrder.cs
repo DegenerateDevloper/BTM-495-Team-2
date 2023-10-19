@@ -1,37 +1,38 @@
 public class CustomerPurchaseOrder
 {
-    int customer_po_ID;
-    customer customer;
-    string order_status;
-    DateTime order_date;
-    Shipment shipment;
-    decimal order_total;
-    Product product;
-    Payment payment;
+    private int customer_purchase_order_ID;
+    private Customer customer;
+    private string order_status;
+    private DateTime order_date;
+    private Shipment shipment;
+    private decimal order_total;
+    private List<Product> products;
+    private Payment payment;
 
-        public void generateReturn() 
-  {
-    // Logic to come
-  }
-        public void calculateTotal() 
-  {
-    // Logic to come
-  }
+    public void returnOrderProducts() 
+    {
+        // Logic to come
+    }
 
-        public void sendCustomerPO() 
-  {
-    // Logic to come
-  }
+    public decimal calculateOrderTotal() 
+    {
+        // Logic to come
+    }
 
-        public void genrateExchange() 
-  {
-    // Logic to come
-  }
+    public void sendPurchaseOrder() 
+    {
+        // Logic to come
+    }
 
-        public void selectDeliveryMethod() 
-  {
-    // Logic to come
-  }
+    public void exchangeOrder() 
+    {
+        // Logic to come
+    }
+
+    public void selectDeliveryMethod(int method_choice) 
+    {
+        // Logic to come
+    }
 
 
 
