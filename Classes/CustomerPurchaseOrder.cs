@@ -6,7 +6,7 @@ public class CustomerPurchaseOrder
     private DateTime order_date;
     private Shipment shipment;
     private decimal order_total;
-    private Product product;
+    private List<Product> products;
     private Payment payment;
 
     public void returnOrderProducts() 

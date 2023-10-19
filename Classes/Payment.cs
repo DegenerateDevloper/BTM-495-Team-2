@@ -4,7 +4,7 @@ public class Payment
     private int order_ID;
     private CustomerPurchaseOrder order_total;
     private PaymentMethod payment_details;
-    private Receipt receipt;
+    private List<Receipt> receipts;
 
     public processPayment(int customer_ID,int delivery_method_type, int payment_info)
     {

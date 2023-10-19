@@ -6,7 +6,7 @@ public class PaymentMethod
     private int card_number;
     private string cardholder_name;
     private DateTime expiration_date;
-    private Customer customer;
+    private List<Customer> customers;
 
     public void sendPaymentMethod() 
     {
