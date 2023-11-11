@@ -1,9 +1,9 @@
 public class SupplierPurchaseOrder
 {
-    private int supplier_purchase_order_ID;
-    private bool purchase_orders_received;
-    private DateTime purchase_order_date;
-    private List<Product> products;
+    public int supplier_purchase_order_ID { get; set; }
+    public bool purchase_orders_received { get; set; }
+    public DateTime purchase_order_date { get; set; }
+    public List<Product> products { get; set; }
 
     public bool checkPurchaseOrdersReceived() 
     {

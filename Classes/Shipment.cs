@@ -1,11 +1,11 @@
 public class Shipment
 {
-    private int shipment_ID;
-    private decimal shipment_cost;
-    private string shipment_date;
-    private string shipment_status;
-    private string shipment_type;
-    private List<DeliveryMethod> delivery_method;
-    private ShoppingCart shopping_cart
+    public int shipment_ID { get; set; }
+    public decimal shipment_cost { get; set; }
+    public string shipment_date { get; set; }
+    public string shipment_status { get; set; }
+    public string shipment_type { get; set; }
+    public List<DeliveryMethod> delivery_method { get; set; }
+    public ShoppingCart shopping_cart { get; set; }
 
 }
