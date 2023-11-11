@@ -68,7 +68,7 @@ public abstract class User
      * If password is valid, now we need to check if username and password exists or not before creating
      * Needs to work with some kind of a data store (DB) in general for purpose security.
      */
-    public bool verifyPassword(string path, string un, string pw) 
+    public bool verifyPassword(string path, string email, string pw) 
     {
         if (pw != "" && un != "")
         {

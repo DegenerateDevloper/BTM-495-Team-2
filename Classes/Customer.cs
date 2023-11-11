@@ -7,6 +7,11 @@ public class Customer : User
 	private bool customer_is_confirmed;
 	private PaymentMethod payment_information;
 
+	public Customer()
+    {
+
+    }
+
 	public void sendConfirmationEmail()
  	{
 		//Logic to come

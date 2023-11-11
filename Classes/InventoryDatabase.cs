@@ -1,14 +1,38 @@
+using System.Collections.Generic
+
+
 public class InventoryDatabase
 {
-    private int product_quantity;
-	private Map<Product> inventory_products;
-	
-    public void storeInventoryItem(string product_ID) 
+	private Dictionary<string, int> inventory_products;
+	public InventoryDatabase()
     {
-        // Logic to come
+        inventory_products = new Dictionary<int, int>();
     }
-	public int getInventoryCount(string product_ID) 
+    public Dictionary<string, int> inventory_products
     {
-        // Logic to come
+        get {return inventory_products;}
+        set {inventory_products = value;}
+    }
+    public void storeInventoryItem(int product_ID, int quantity) 
+    {
+        if (inventory_products.ContainsKey(product_ID))
+        {
+            inventory_products[product_ID]+= quantity;
+        }
+        else
+        {
+            inventory_products.Add(product_ID, quantity);
+        }
+    }
+	public int getProductInventoryCount(int product_ID) 
+    {
+        if (inventory_products.ContainsKey(product_ID))
+        {
+            return inventory_products.Count(product_ID);
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

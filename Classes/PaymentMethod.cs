@@ -28,7 +28,7 @@ public class PaymentMethod
         this.expiration_date = expirationDate;
     }
 
-    public int sendPaymentMethod(int customerID, int deliveryMethodType) 
+    public void sendPaymentMethod() 
     {
         //Just send all the details to Process Payment class
         Payment payment = new Payment();
