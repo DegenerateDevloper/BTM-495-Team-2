@@ -5,9 +5,19 @@ public class CustomerPurchaseOrder
     private string order_status;
     private DateTime order_date;
     private Shipment shipment;
-    private decimal order_total;
+    private ShoppingCart order_total;
     private List<Product> products;
     private Payment payment;
+
+    public int customer_purchase_order_ID
+    {
+        get {return customer_purchase_order_ID;}
+        set {customer_purchase_order_ID = value;}
+    }
+    private ShoppingCart order_total
+    {
+        get {return order_total;}
+    }
 
     public void returnOrderProducts() 
     {
@@ -33,7 +43,4 @@ public class CustomerPurchaseOrder
     {
         // Logic to come
     }
-
-
-
 }
