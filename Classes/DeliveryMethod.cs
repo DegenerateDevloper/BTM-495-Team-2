@@ -8,5 +8,4 @@ public class DeliveryMethod
     {
         // Logic to come
     }
-
 }
