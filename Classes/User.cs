@@ -114,6 +114,55 @@ public abstract class User
         }
     }
 
+
+    public bool Register(string path, string email, string pw)
+    {
+        //Validate if the inputs are valid, and create a new account if it is and bring him to the venue page
+        //Validate if username and the password or valid or not
+        if (pw != "" && email != "")
+        {
+            //Validate if the username and password match
+            var isEmail = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            var hasNum = new Regex(@"[0-9]+");
+            var hasUpperChar = new Regex(@"[A-Z]+");
+            var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]+");
+            if (isEmail.IsMatch(email) && hasNum.IsMatch(pw) && hasUpperChar.IsMatch(pw) && hasSymbols.IsMatch(pw))
+            {
+                //Password is valid, now we need to check if username and password exists or not before creating
+                //Needs to work with a database in general for purpose security
+                var hashedpw = Hash.Hash_SHA1(pw);
+                StreamReader existingUsers = new StreamReader(path);
+                var counter = 0;
+                string line;
+                while ((line = existingUsers.ReadLine()) != null)
+                {
+                    string[] existingUser = line.Split(new string[] { ": " }, StringSplitOptions.None);
+                    if (existingUser[0].Equals(un) && existingUser[1].Equals(hashedpw))
+                    {
+                        counter++;
+                        break;
+                    }
+                    else if (existingUser[0].Equals(un))
+                    {
+                        counter++;
+                        break;
+                    }
+                }
+                existingUsers.Close();
+
+                if (counter == 0)
+                {
+                    StreamWriter newUser = new StreamWriter(path);
+                    newUser.WriteLine(email + ": " + hashedpw);
+                    newUser.Close();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     /**
      * Used to hash and dehash passwords, a security measure to not leak such private info easily.
      */
