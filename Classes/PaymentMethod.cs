@@ -1,75 +1,55 @@
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.IO;
+using System.Reflection;
+using System;
+
 public class PaymentMethod
 {
-    private int pmethod_ID;
-    private string pmethod_type;
-    private int cvc_code;
-    private int card_number;
-    private string cardholder_name;
-    private DateTime expiration_date;
-    private List<Customer> customers;
+    public int pmethod_ID { get; set; }
+    public string pmethod_type { get; set; }
+    public int cvc_code { get; set; }
+    public int card_number { get; set; }
+    public string cardholder_name { get; set; }
+    public DateTime expiration_date { get; set; }
+    //public List<Customer> customers { get; set; }
 
-    public PaymentMethod(pmethod_type string, cvc_code int, card_number int, cardholder_name string, expiration_date DateTime)
+    public PaymentMethod(int pmethodID, string pmethodtype, int cvc, int cardNumber, string cardholderName, DateTime expirationDate)
     {
-        this,pmethod_type = pmethod_type;
-        this.cvc_code = cvc_code;
-        this.card_number = card_number;
-        this.cardholder_name = cardholder_name;
-        this.expiration_date = expiration_date;
-    }
-     public int pmethod_ID
-    {
-        get { return pmethod_ID; }
-        set { pmethod_ID = value; }
+        this.pmethod_ID = pmethodID;
+        this.pmethod_type = pmethodtype;
+        this.cvc_code = cvc;
+        this.card_number = cardNumber;
+        this.cardholder_name = cardholderName;
+        this.expiration_date = expirationDate;
     }
 
-    public string pmethod_type
+    public PaymentMethod(string pmethodtype, int cvc, int cardNumber, string cardholderName, DateTime expirationDate)
     {
-        get { return pmethod_type; }
-        set { pmethod_type = value; }
+        //Retrieve the last payment method from data storage and enter the last ID
+        string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\payment_method.txt";
+        string lastPaymentMethod = File.ReadLines(path).Last();
+        int lastPaymentMethodID = 0;
+        if (lastPaymentMethod != null || lastPaymentMethod != "")
+        {
+            string[] singlePaymentMethod = lastPaymentMethod.Split(new string[] { ": " }, StringSplitOptions.None);
+            //The first index is the ID of the payment method
+            Int32.TryParse(singlePaymentMethod[0], out lastPaymentMethodID + 1);
+        }
+        this.pmethod_ID = lastPaymentMethodID;
+        this.pmethod_type = pmethodtype;
+        this.cvc_code = cvc;
+        this.card_number = cardNumber;
+        this.cardholder_name = cardholderName;
+        this.expiration_date = expirationDate;
     }
 
-    public int cvc_code
+    public void sendPaymentMethod() 
     {
-        get { return cvc_code; }
-        set { cvc_code = value; }
-    }
-
-    public int card_number
-    {
-        get { return card_number; }
-        set { card_number = value; }
-    }
-
-    public string cardholder_name
-    {
-        get { return cardholder_name; }
-        set { cardholder_name = value; }
-    }
-
-    public DateTime expiration_date
-    {
-        get { return expiration_date; }
-        set { expiration_date = value; }
-    }
-
-    public PaymentMethod()
-    {
-        customers = new List<Customer>();
-    }
-
-    public List<Customer> customers
-    {
-        get {return customers;}
-    }
-
-    public void addCustomer(Customer customer)
-    {
-        customers.add(customer);
-    }
-
-    public void sendCreditCardInformation() 
-    {
-        // Logic to come
+        //Just send all the details to Process Payment class
+        Payment payment = new Payment();
+        int newReceiptId = payment.processPayment(customerID, deliveryMethodType, this);
+        return newReceiptId;
     }
 
 }
