@@ -61,13 +61,13 @@ public class Payment
 
             //Create a customer purchase order
             CustomerPurchaseOrder newCPO = new CustomerPurchaseOrder();
-
+            newCPO.insertCPO();
         }
         else
         {
             //Customer is paying in another fashion where cards are not involved
             CustomerPurchaseOrder newCPO = new CustomerPurchaseOrder();
-
+            newCPO.insertCPO();
         }
 
         //Retrieve the data storage with the receipts and add at the new one at the end of it and return the ID.
