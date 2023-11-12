@@ -32,7 +32,7 @@ public class ShoppingCart
         calculateTotalPrice();
     }
 
-    private void calculateTotalPriceWithoutTaxShipping()
+    private void calculateTotalPriceWithoutTax()
     {
         decimal TotalPrice = 0;
         foreach (var Product in products_in_sc)
