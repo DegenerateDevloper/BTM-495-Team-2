@@ -1,5 +1,11 @@
 using System.Linq;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.IO;
+using System.Reflection;
+using System;
+
 
 public class Receipt
 {
@@ -9,17 +15,26 @@ public class Receipt
     public decimal total_cost { get; set; }
     public Payment payment { get; set; }
 
+    public Receipt(int receiptID, List<Product> productsBought, int customerID, Payment aPayment)
+    {
+        this.receipt_ID = receiptID;
+        this.products_bought = productsBought;
+        this.customer_ID = customerID;
+        this.total_cost = productsBought.Sum(singleProd => singleProd.product_price);
+        this.payment = aPayment;
+    }
+
     public Receipt(List<Product> productsBought, int customerID, Payment aPayment)
     {
         // Retrieve the last receipt method from data storage and enter the last ID
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\receipt.txt";
-        string lastPayment = File.ReadLines(path).Last();
-        int lastPaymentID = 0;
-        if (lastPayment != null || lastPayment != "")
+        string lastReceipt = File.ReadLines(path).Last();
+        int lastReceiptID = 0;
+        if (lastReceipt != null || lastReceipt != "")
         {
-            string[] singlePayment = lastPayment.Split(new string[] { ": " }, StringSplitOptions.None);
-            //The first index is the ID of the payment
-            Int32.TryParse(singlePayment[1], out lastPaymentID + 1);
+            string[] singleReceipt = lastReceipt.Split(new string[] { ": " }, StringSplitOptions.None);
+            //The first index is the ID of the receipt
+            Int32.TryParse(singleReceipt[0], out lastReceiptID + 1);
         }
         this.receipt_ID = lastReceiptID;
         this.products_bought = productsBought;
@@ -28,11 +43,24 @@ public class Receipt
         this.payment = aPayment;
     }
 
-    public int retrieveReceipt() 
+    public int addAndRetrieveReceipt() 
     {
         //Enter the current receipt into data store as a matter of proof
-        StreamWriter newReceipt = new StreamWriter(path + "\\Files\\receipts.txt");
-        newReceipt.WriteLine(JsonConvert.SerializeObject(this));
+        string insertNewReceipt = this.receipt_ID + ": " +this.customer_ID+ ", "+this.total_cost+". Products bought: ";
+        for(int i=0; i<products_bought.length; i++)
+        {
+            if (i == products_bought.length-1)
+            {
+                string.Concat(insertNewReceipt, products_bought[i].product_name + ".");
+            }
+            else
+            {
+                string.Concat(insertNewReceipt, products_bought[i].product_name + ", ");
+            }
+        }
+        string.Concat(insertNewReceipt, aPayment.payment_ID);
+        StreamWriter newReceipt = new StreamWriter(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\receipts.txt");
+        newReceipt.WriteLine(insertNewReceipt);
         newReceipt.Close();
         return this.receipt_ID;
     }

@@ -1,3 +1,9 @@
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.IO;
+using System.Reflection;
+using System;
+
 public class PaymentMethod
 {
     public int pmethod_ID { get; set; }
@@ -8,6 +14,16 @@ public class PaymentMethod
     public DateTime expiration_date { get; set; }
     //public List<Customer> customers { get; set; }
 
+    public PaymentMethod(int pmethodID, string pmethodtype, int cvc, int cardNumber, string cardholderName, DateTime expirationDate)
+    {
+        this.pmethod_ID = pmethodID;
+        this.pmethod_type = pmethodtype;
+        this.cvc_code = cvc;
+        this.card_number = cardNumber;
+        this.cardholder_name = cardholderName;
+        this.expiration_date = expirationDate;
+    }
+
     public PaymentMethod(string pmethodtype, int cvc, int cardNumber, string cardholderName, DateTime expirationDate)
     {
         //Retrieve the last payment method from data storage and enter the last ID
@@ -17,8 +33,8 @@ public class PaymentMethod
         if (lastPaymentMethod != null || lastPaymentMethod != "")
         {
             string[] singlePaymentMethod = lastPaymentMethod.Split(new string[] { ": " }, StringSplitOptions.None);
-            //The first index is the ID of the payment
-            Int32.TryParse(singlePaymentMethod[1], out lastPaymentMethodID + 1);
+            //The first index is the ID of the payment method
+            Int32.TryParse(singlePaymentMethod[0], out lastPaymentMethodID + 1);
         }
         this.pmethod_ID = lastPaymentMethodID;
         this.pmethod_type = pmethodtype;

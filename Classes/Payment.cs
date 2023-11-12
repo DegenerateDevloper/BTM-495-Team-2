@@ -12,7 +12,16 @@ public class Payment
     //private PaymentMethod payment_details;
     //private List<Receipt> receipts;
 
-    public PaymentMethod(int orderID, CustomerPurchaseOrder orderTotal, List<Receipt> receipts)
+    public Payment(int paymentID, int orderID, CustomerPurchaseOrder orderTotal, List<Receipt> receipts)
+    {
+        this.payment_ID = paymentID;
+        this.payment_ID = lastPaymentID;
+        this.order_ID = orderID;
+        this.order_total = orderTotal;
+        //this.receipts = receipts;
+    }
+
+    public Payment(int orderID, CustomerPurchaseOrder orderTotal, List<Receipt> receipts)
     {
         //Retrieve the last payment from data storage and enter the last ID
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\payment.txt";
@@ -22,7 +31,7 @@ public class Payment
         {
             string[] singlePayment = lastPayment.Split(new string[] { ": " }, StringSplitOptions.None);
             //The first index is the ID of the payment
-            Int32.TryParse(singlePayment[1], out lastPaymentID + 1);
+            Int32.TryParse(singlePayment[0], out lastPaymentID + 1);
         }
         this.payment_ID = lastPaymentID;
         this.order_ID = orderID;

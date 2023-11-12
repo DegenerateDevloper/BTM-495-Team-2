@@ -115,7 +115,7 @@ public abstract class User
     }
 
 
-    public bool Register(string path, string email, string pw)
+    public bool registers(string path, string email, string pw)
     {
         //Validate if the inputs are valid, and create a new account if it is and bring him to the venue page
         //Validate if username and the password or valid or not
