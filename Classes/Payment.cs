@@ -11,17 +11,19 @@ public class Payment
     private CustomerPurchaseOrder order_total;
     //private PaymentMethod payment_details;
     //private List<Receipt> receipts;
+    private string payment_status;
 
-    public Payment(int paymentID, int orderID, CustomerPurchaseOrder orderTotal, List<Receipt> receipts)
+    public Payment(int paymentID, int orderID, CustomerPurchaseOrder orderTotal, string paymentStatus)
     {
         this.payment_ID = paymentID;
         this.payment_ID = lastPaymentID;
         this.order_ID = orderID;
         this.order_total = orderTotal;
+        this.payment_status = "Pending";
         //this.receipts = receipts;
     }
 
-    public Payment(int orderID, CustomerPurchaseOrder orderTotal, List<Receipt> receipts)
+    public Payment(int orderID, CustomerPurchaseOrder orderTotal, string paymentStatus)
     {
         //Retrieve the last payment from data storage and enter the last ID
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\payment.txt";
@@ -36,14 +38,13 @@ public class Payment
         this.payment_ID = lastPaymentID;
         this.order_ID = orderID;
         this.order_total = orderTotal;
-        //this.receipts = receipts;
+        this.payment_status = "Pending";
     }
 
     public processPayment(int customer_ID, int delivery_method_type, PaymentMethod pm, List<Product> productsBought)
     {
         //Since we already sent the payment, we want to validate if it is valid or not
         //First, we know that the customer already exists so we validate if the payment method is valid
-
         
         if(pm.pmethod_type.Equals("credit") || pm.pmethod_type.Equals("debit")) 
         {
@@ -57,17 +58,20 @@ public class Payment
             {
                 //Some information on the card is not valid, so return 0 for false
                 return 0;
+                this.payment_status = "Failed";
             }
 
             //Create a customer purchase order
             CustomerPurchaseOrder newCPO = new CustomerPurchaseOrder();
             newCPO.insertCPO();
+            this.payment_status = "Approved";
         }
         else
         {
             //Customer is paying in another fashion where cards are not involved
             CustomerPurchaseOrder newCPO = new CustomerPurchaseOrder();
             newCPO.insertCPO();
+            this.payment_status = "Approved";
         }
 
         //Retrieve the data storage with the receipts and add at the new one at the end of it and return the ID.
