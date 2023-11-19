@@ -9,8 +9,7 @@ public class Payment
     private int payment_ID;
     private int order_ID;
     private CustomerPurchaseOrder order_total;
-    //private PaymentMethod payment_details;
-    //private List<Receipt> receipts;
+    private CustomerPurchaseOrder refund_amount;
     private string payment_status;
 
     public Payment(int paymentID, int orderID, CustomerPurchaseOrder orderTotal, string paymentStatus)
@@ -79,5 +78,25 @@ public class Payment
         Receipt newReceipt = new Receipt(productsBought, customer_ID, this);
         int newReceiptId = newReceipt.createReceipt();
         return newReceiptId;
+    }
+
+    public bool issueRefund(decimal refund_amount, string payment_ID)
+    {
+        bool refundSuccessful = SimulateRefundProcess(refund_amount, payment_ID);
+
+        if (refundSuccessful)
+        {
+            Console.WriteLine($"Refund of {refund_amount:C} for payment ID: {payment_ID} processed successfully.");
+            return true;
+        }
+        else
+        {
+            Console.WriteLine($"Refund of {refund_amount:C} for payment ID: {payment_ID} failed.");
+            return false;
+        }
+    }
+    private bool SimulateRefundProcess(decimal amount, string payment_ID)
+    {
+        return true;
     }
 }
