@@ -7,6 +7,7 @@ public class CustomerPurchaseOrder
     private Shipment shipment;
     private ShoppingCart order_total;
     private decimal order_total_with_tax;
+    private decimal refund_amount;
     private bool isReturn;
     private bool isExchange;
     private List<Product> products = new List<Product>();
@@ -21,6 +22,12 @@ public class CustomerPurchaseOrder
     {
         get {return isReturn;}
         set {isReturn = value;}    
+    }
+
+    private decimal refund_amount
+    {
+        get {return refund_amount;}
+        set {refund_amount = value;}    
     }
     public bool isExchange
     {
