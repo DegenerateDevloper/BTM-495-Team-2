@@ -5,6 +5,13 @@ public class ShoppingCart
     private Customer customer;
     public decimal total_price;
 
+    public ShoppingCart(List<Product> products, Customer customer, decimal total)
+    {
+        this.products_in_sc = products;
+        this.customer = customer;
+        this.total_price = total;
+    }
+
     public int shopping_cart_ID
     {
         get {return shopping_cart_ID;}
@@ -20,13 +27,13 @@ public class ShoppingCart
         get {return products_in_sc;}
     } 
 
-    public void addToShoppingCart(string product_ID) 
+    public void addToShoppingCart(int product_ID) 
     {
         products_in_sc.Add(products_in_sc);
         calculateTotalPrice();
     }
     
-    public void deleteFromShoppingCart(string product_ID) 
+    public void deleteFromShoppingCart(int product_ID) 
     {
         products_in_sc.Remove(products_in_sc);
         calculateTotalPrice();

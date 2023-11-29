@@ -62,7 +62,18 @@ public class Receipt
         StreamWriter newReceipt = new StreamWriter(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\receipts.txt");
         newReceipt.WriteLine(insertNewReceipt);
         newReceipt.Close();
+
+        emptyCustomerShoppingCart();
+
         return this.receipt_ID;
+    }
+
+
+    public void emptyCustomerShoppingCart()
+    {
+        //retrieve the customer's info to empty its shopping cart from the DB appropriately
+        //Customer ID will be a foreign key in the DB
+        
     }
     
 }
