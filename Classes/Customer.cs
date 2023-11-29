@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Windows;
 using System.IO;
 using System.Reflection;
@@ -54,7 +55,7 @@ public class Customer : User
     {
         //Check if the customer has a Tact Gearz account
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\paymentMethod.txt";
-        string[] paymentMethodInDB = File.ReadAllLines(path).ToList();
+        List<string> paymentMethodInDB = File.ReadAllLines(path).ToList();
         int cvc = 0;
         int cardnum = 0;
         DateTime expDate = 0;
