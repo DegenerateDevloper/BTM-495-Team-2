@@ -47,7 +47,7 @@ public class DeliveryMethod
     {
         // Retrieve the delivery method that the customer wants
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\deliveryMethod.txt";
-        string[] deliveryMethodInDB = File.ReadLines(path).Split(new string[] { "\n" }, StringSplitOptions.None);
+        List<string> deliveryMethodInDB = File.ReadAllLines(path).ToList();
         int dmType = 0;
         int dmID = 0;
         bool availability = false;

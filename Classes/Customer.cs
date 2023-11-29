@@ -54,8 +54,7 @@ public class Customer : User
     {
         //Check if the customer has a Tact Gearz account
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\paymentMethod.txt";
-        string[] paymentMethodInDB = File.ReadLines(path).Split(new string[] { "\n" }, StringSplitOptions.None);
-        int pmID = 0;
+        string[] paymentMethodInDB = File.ReadAllLines(path).ToList();
         int cvc = 0;
         int cardnum = 0;
         DateTime expDate = 0;

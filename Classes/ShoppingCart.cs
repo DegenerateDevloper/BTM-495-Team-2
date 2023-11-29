@@ -2,13 +2,13 @@ public class ShoppingCart
 {
     private int shopping_cart_ID;
     private List<Product> products_in_sc = new List<Product>();
-    private Customer customer;
+    private int customerID;
     public decimal total_price;
 
-    public ShoppingCart(List<Product> products, Customer customer, decimal total)
+    public ShoppingCart(List<Product> products, int customerID, decimal total)
     {
         this.products_in_sc = products;
-        this.customer = customer;
+        this.customerID = customerID;
         this.total_price = total;
     }
 

@@ -95,7 +95,7 @@ public class Product
         // Retrieve the product that the customer wants
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\product.txt";
         //Seperate the records by using the new line as a breaking point to retrieve all of them
-        string[] productsInDB = File.ReadLines(path).Split(new string[] { "\n" }, StringSplitOptions.None);
+        string[] productsInDB = File.ReadAllLines(path).ToList();
         int amountProductFound = 0;
         int productID = 0;
         if (productsInDB != null || productsInDB != "")

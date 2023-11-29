@@ -1,6 +1,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Windows;
 using System.IO;
 using System.Reflection;
@@ -68,12 +69,34 @@ public class Receipt
         return this.receipt_ID;
     }
 
-
+    /**
+     * Retrieve the customer's info to empty its shopping cart from the DB appropriately
+     * Customer ID will be a foreign key in the DB
+     * Retrieve the last receipt method from data storage and enter the last ID
+     */
     public void emptyCustomerShoppingCart()
     {
-        //retrieve the customer's info to empty its shopping cart from the DB appropriately
-        //Customer ID will be a foreign key in the DB
         
+        string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\shoppingCarts.txt";
+        List<string> shoppingCartInDB = File.ReadAllLines(path).ToList();
+        int customerID = 0;
+        if (shoppingCartInDB != null || shoppingCartInDB != "")
+        {
+            for (int i = 0; i < shoppingCartInDB.Length; i++)
+            {
+                string[] singleSC = shoppingCartInDB.Split(new string[] { ": " }, StringSplitOptions.None);
+                string[] singleSCInfo = singleSC[1].Split(new string[] { ", " }, StringSplitOptions.None);
+                //The first index is the ID of the receipt
+                Int32.TryParse(singleSCInfo[1], out customerID);
+                if (this.customer_ID == customerID)
+                {
+                    //Remove the shopping cart of the respective customer from the DB since payment has been approved
+                    shoppingCartInDB.RemoveAt(i);
+                    File.WriteAllLines(path, shoppingCartInDB.ToArray());
+                }
+            }//end for loop
+
+        }
     }
     
 }
