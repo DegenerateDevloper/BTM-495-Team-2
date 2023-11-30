@@ -24,7 +24,16 @@ public class InventoryDatabase
             inventory_products.Add(product_ID, quantity);
         }
     }
-	public int getProductInventoryCount(int product_ID) 
+
+    public void removeInventoryItem(int product_ID, int quantity)
+    {
+        if (inventory_products.ContainsKey(product_ID))
+        {
+            inventory_products[product_ID] -= quantity;
+        }
+    }
+
+    public int getProductInventoryCount(int product_ID) 
     {
         if (inventory_products.ContainsKey(product_ID))
         {
