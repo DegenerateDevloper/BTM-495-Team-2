@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public class DeliveryMethod
 {
     private int delivery_method_ID;
@@ -25,18 +28,45 @@ public class DeliveryMethod
 
     public deliveryMethod(int deliveryMethodID, int deliveryMethodType, bool availability)
     {
-        delivery_method_ID = deliveryMethodID;
-        delivery_method_type = deliveryMethodType;
-        availability = availability;
+        this.delivery_method_ID = deliveryMethodID;
+        this.delivery_method_type = deliveryMethodType;
+        this.availability = availability;
     }
 
     public void setAvailability(bool newAvailability)
     {
-        availability = newAvailability;
+        this.availability = newAvailability;
     }
 
     public bool getAvailability()
     {
-        return Availability;
+        return this.availability;
     }
+
+    public bool DeliveryMethod selectDeliveryMethod(int methodChoice)
+    {
+        // Retrieve the delivery method that the customer wants
+        string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\deliveryMethod.txt";
+        List<string> deliveryMethodInDB = File.ReadAllLines(path).ToList();
+        int dmType = 0;
+        int dmID = 0;
+        bool availability = false;
+        if (deliveryMethodInDB != null || deliveryMethodInDB != "")
+        {
+            for (int i = 0; i < productsInDB.Length; i++)
+            {
+                string[] singleDM = deliveryMethodInDB[i].Split(new string[] { ": " }, StringSplitOptions.None);
+                //The first index is the ID of the product
+                string[] singleDMInfo = singleDM[1].Split(new string[] { ", " }, StringSplitOptions.None);
+                Int32.TryParse(singleDM[0], out dmID);
+                Int32.TryParse(singleDMInfo[0], out dmType);
+                if (dmType == methodChoice)
+                {
+                    Boolean.TryParse(singleDMInfo[1], out availability);
+                    return availability;
+                }
+        else
+        {
+            return false;
+        }
 }
