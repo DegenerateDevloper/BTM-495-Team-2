@@ -80,7 +80,7 @@ public class Payment
         return newReceiptId;
     }
 
-    public bool issueRefund(decimal refund_amount, string payment_ID)
+    public bool issueRefund(decimal refund_amount, int payment_ID)
     {
         bool refundSuccessful = SimulateRefundProcess(refund_amount, payment_ID);
 
@@ -95,7 +95,7 @@ public class Payment
             return false;
         }
     }
-    private bool SimulateRefundProcess(decimal amount, string payment_ID)
+    private bool simulateRefundProcess(decimal amount, int payment_ID)
     {
         return true;
     }

@@ -43,7 +43,7 @@ public class DeliveryMethod
         return this.availability;
     }
 
-    public bool DeliveryMethod selectDeliveryMethod(int methodChoice)
+    public bool selectDeliveryMethod(int methodChoice)
     {
         // Retrieve the delivery method that the customer wants
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\deliveryMethod.txt";
