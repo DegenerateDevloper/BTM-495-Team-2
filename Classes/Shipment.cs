@@ -14,7 +14,7 @@ public class Shipment
     public List<DeliveryMethod> delivery_method { get; set; }
     public ShoppingCart shopping_cart { get; set; }
 
-    public ShoppingCart(int shipmentID, decimal shipmentCost, DateTime shipmentDate, string status, string type)
+    public Shipment(int shipmentID, decimal shipmentCost, DateTime shipmentDate, string status, string type)
     {
         this.shipment_ID = shipmentID;
         this.shipment_cost = shipmentCost;
@@ -23,7 +23,7 @@ public class Shipment
         this.shipment_type = type;
     }
 
-    public ShoppingCart(decimal shipmentCost, DateTime shipmentDate, string status, string type)
+    public Shipment(decimal shipmentCost, DateTime shipmentDate, string status, string type)
     {
         //Retrieve the last shipment from data storage and enter the last ID
         string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Files\\shipment.txt";
