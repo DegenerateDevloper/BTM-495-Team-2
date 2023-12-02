@@ -10,6 +10,7 @@ public class SupplierPurchaseOrder
     public bool purchase_orders_received { get; set; }
     public DateTime purchase_order_date { get; set; }
     public List<Product> products { get; set; }
+    private readonly Notification emailNotification;
 
     public SupplierPurchaseOrder(int supplierPOID, bool purchase_orders_received, DateTime purchase_order_date, List<Product> products)
     {
@@ -17,6 +18,7 @@ public class SupplierPurchaseOrder
         this.purchase_orders_received = purchase_orders_received;
         this.purchase_order_date = purchase_order_date;
         this.products = products;
+        this.emailNotification = emailNotification;
     }
 
     public SupplierPurchaseOrder(bool purchase_orders_received, DateTime purchase_order_date, List<Product> products)
@@ -75,5 +77,24 @@ public class SupplierPurchaseOrder
         }
         addProdtoSPO.WriteLine(insertLine);
         addProdtoSPO.Close();
+    }
+
+    public bool SendPONotification(string recipientEmail, string SupplierPurchaseOrder)
+    {
+        string subject = "PO Notification";
+        string body = $"Here is your purchase order: {SupplierPurchaseOrder}. For more details, please contact our support team.";
+
+        return emailNotification.SendEmail(recipientEmail, subject, body);
+    }
+
+    public bool confirmationPopUp()
+    {
+        if (SendPONotification == true)
+        {
+            string title = "PO Email Sent";
+            string message = $"The email containing the PO has been sent to the supplier";
+
+            return emailNotification.ShowNotification(title, message);
+        }
     }
 }

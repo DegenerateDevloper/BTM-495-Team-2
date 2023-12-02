@@ -83,4 +83,12 @@ public class CustomerPurchaseOrder
             InventoryDatabase.storeInventoryItem();
         }
     }
+
+        public bool SendPONotification(string recipientEmail, string SupplierPurchaseOrder)
+    {
+        string subject = "PO Notification";
+        string body = $"Here is your purchase order: {CustomerPurchaseOrder}. For more details, please contact our support team.";
+
+        return emailNotification.SendEmail(recipientEmail, subject, body);
+    }
 }

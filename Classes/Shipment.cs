@@ -13,6 +13,7 @@ public class Shipment
     public string shipment_type { get; set; }
     public List<DeliveryMethod> delivery_method { get; set; }
     public ShoppingCart shopping_cart { get; set; }
+     private readonly Notification emailNotification;
 
     public Shipment(int shipmentID, decimal shipmentCost, DateTime shipmentDate, string status, string type)
     {
@@ -21,6 +22,7 @@ public class Shipment
         this.shipment_date = shipmentDate;
         this.shipment_status = status;
         this.shipment_type = type;
+        this.emailNotification = emailNotification;
     }
 
     public Shipment(decimal shipmentCost, DateTime shipmentDate, string status, string type)
@@ -41,5 +43,13 @@ public class Shipment
         this.shipment_date = shipmentDate;
         this.shipment_status = status;
         this.shipment_type = type;
+    }
+
+    public bool SendShipmentNotification(string recipientEmail, string deliveryMethod)
+    {
+        string subject = "Shipment Notification";
+        string body = $"Your shipment is scheduled for delivery via {deliveryMethod}. For more details, please contact our support team.";
+
+        return emailNotification.SendEmail(recipientEmail, subject, body, senderPassword);
     }
 }
