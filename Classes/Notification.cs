@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 public class Notification
 {
-    private readonly string smtpServer;
-    private readonly int port;
-    private readonly string senderEmail;
-    private readonly string message;
-    private readonly string title;
+    private string smtpServer { get; private set;}
+    private int port { get; private set;}
+    private string senderEmail { get; private set;}
+    private string message { get; private set;}
+    private string title { get; private set;}
     public EmailNotification(string smtpServer, int port, string senderEmail)
     {
         this.smtpServer = smtpServer;
